@@ -1,10 +1,19 @@
+import requests
+import json
+
 
 class Media:
 
-    def __init__(self, title="No Title", author="No Author", year="No Year"):
-        self.title = title
-        self.author = author
-        self.release_year = year
+    def __init__(self, title="No Title", author="No Author", year="No Year", json_dict=None):
+        if json_dict is not None:
+            self.title = json_dict["trackName"]
+            self.author = json_dict["artistName"]
+            self.year = json_dict["releaseDate"]
+            self.year = self.year[0:3]
+        else:
+            self.title = title
+            self.author = author
+            self.release_year = year
 
     def __str__(self):
         return self.title + " by " + self.author + "(" + self.release_year + ")"
@@ -15,11 +24,16 @@ class Media:
 ## Other classes, functions, etc. should go here
 class Song(Media):
     def __init__(self, title= "No Title", author="No Author", year="No Year", album="No Album", genre="No Genre",
-                 length= 0):
+                 length= 0, json_dict=None):
         super().__init__(title, author, year)
-        self.album = album
-        self.genre = genre
-        self.length = length
+        if json_dict is not None:
+            self.album = json_dict["collectionName"]
+            self.genre = json_dict["primaryGenreName"]
+            self.length = json_dict["trackTimeMillis"]
+        else:
+            self.album = album
+            self.genre = genre
+            self.length = length
 
 
     def __str__(self):
@@ -32,10 +46,14 @@ class Song(Media):
 
 class Movie(Media):
     def __init__(self, title="No Title", author="No Author", year="No Release Year", rating="No Rating",
-                 movie_length=0):
+                 movie_length=0, json_dict=None):
         super().__init__(title, author, year)
-        self.rating = rating
-        self.movie_length = movie_length
+        if json_dict is not None:
+            self.rating = json_dict["contentAdvisoryRating"]
+            self.movie_length = json_dict["trackTimeMillis"]
+        else:
+            self.rating = rating
+            self.movie_length = movie_length
 
     def __str__(self):
         return super().__str__() + "[" + self.rating + "]"
