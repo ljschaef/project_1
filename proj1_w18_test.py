@@ -3,6 +3,7 @@ import proj1_w18
 class TestMedia(unittest.TestCase):
 
     def testConstructor(self):
+
         m1 = proj1.Media()
         m2 = proj1.Media("1999", "Prince")
 
@@ -42,6 +43,13 @@ class TestMedia(unittest.TestCase):
         pass
 
     def testString(self):
+
+        m1 = proj1.Media()
+        m2 = proj1.Media("1999", "Prince")
+
+        self.assertEqual(m1, "No Title by No Author(No Year)")
+        self.assertEqual(m2, "1999 by Prince(No Year)")
+
         s1 = proj1.Song()
         s2 = proj1.Song("Demons", "Kai Wachi", "2016", "Demons", "EDM", 251000)
 
@@ -57,6 +65,13 @@ class TestMedia(unittest.TestCase):
         pass
 
     def testLength(self):
+
+        m1 = proj1.Media()
+        m2 = proj1.Media("1999", "Prince")
+
+        self.assertEqual(len(m1),0)
+        self.assertEqual(len(m2), 0)
+
         s1 = proj1.Song()
         s2 = proj1.Song("Demons", "Kai Wachi", "2016", "Demons", "EDM", 251000)
 
@@ -72,6 +87,28 @@ class TestMedia(unittest.TestCase):
         pass
 
     def testRandom(self):
+
+        m1 = proj1.Media()
+        m2 = proj1.Media("1999", "Prince")
+
+        s1 = proj1.Song()
+        s2 = proj1.Song("Demons", "Kai Wachi", "2016", "Demons", "EDM", 251000)
+
+        mo1 = proj1.Movie()
+        mo2 = proj1.Movie("Cars 3", "Brian Fee", "2017", "6.8", 6120000)
+
+        self.assertEqual(hasattr(m1, rating), False)
+        self.assertEqual(hasattr(m2, rating), False)
+        self.assertEqual(hasattr(s1, rating), False)
+        self.assertEqual(hasattr(s2, rating), False)
+        self.assertEqual(hasattr(mo1, genre), False)
+        self.assertEqual(hasattr(mo2, genre), False)
+        self.assertEqual(hasattr(m1, genre), False)
+        self.assertEqual(hasattr(m2, genre), False)
+        self.assertEqual(hasattr(mo1, album), False)
+        self.assertEqual(hasattr(mo2, album), False)
+        self.assertEqual(hasattr(m1, album), False)
+        self.assertEqual(hasattr(m2, album), False)
 
         pass
 
