@@ -16,7 +16,7 @@ class TestMedia(unittest.TestCase):
         self.assertEqual(len(m2), 0)
 
         s1 = proj1.Song()
-        s2 = proj1.Song("Demons", "Kai Wachi", "2016", "Demons", 251000)
+        s2 = proj1.Song("Demons", "Kai Wachi", "2016", "Demons", "EDM", 251000)
 
         self.assertEqual(s1.title, "No Title")
         self.assertEqual(s2.title, "Demons")
@@ -43,22 +43,22 @@ class TestMedia(unittest.TestCase):
 
     def testString(self):
         s1 = proj1.Song()
-        s2 = proj1.Song("Demons", "Kai Wachi", "2016", "Demons", 251000)
+        s2 = proj1.Song("Demons", "Kai Wachi", "2016", "Demons", "EDM", 251000)
 
-        print()
-        print()
+        self.assertEqual(s1, "No Title by No Author(No Year)[No Genre]")
+        self.assertEqual(s2, "Demons by Kai Wachi(2016)[EDM]")
 
         mo1 = proj1.Movie()
         mo2 = proj1.Movie("Cars 3", "Brian Fee", "2017", "6.8", 6120000)
-        print()
-        print()
 
+        self.assertEqual(mo1, "No Title by No Author(No Release Year)[No Rating]")
+        self.assertEqual(mo2, "Cars 3 by Brian Fee(2017)[6.8]")
 
         pass
 
     def testLength(self):
         s1 = proj1.Song()
-        s2 = proj1.Song("Demons", "Kai Wachi", "2016", "Demons", 251000)
+        s2 = proj1.Song("Demons", "Kai Wachi", "2016", "Demons", "EDM", 251000)
 
         self.assertEqual(len(s1), 0)
         self.assertEqual(len(s2), 251)
