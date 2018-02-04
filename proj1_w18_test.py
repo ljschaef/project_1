@@ -10,9 +10,14 @@ class TestMedia(unittest.TestCase):
         self.assertEqual(m1.author, "No Author")
         self.assertEqual(m2.title, "1999")
         self.assertEqual(m2.author, "Prince")
+        self.assertEqual(m1.year, "No Year")
+        self.assertEqual(m2.year, "No Year")
+        self.assertEqual(len(m1), 0)
+        self.assertEqual(len(m2), 0)
 
         s1 = proj1.Song()
         s2 = proj1.Song("Demons", "Kai Wachi", "2016", "Demons", 251000)
+
         self.assertEqual(s1.title, "No Title")
         self.assertEqual(s2.title, "Demons")
         self.assertEqual(s1.author, "No Author")
@@ -21,12 +26,10 @@ class TestMedia(unittest.TestCase):
         self.assertEqual(s2.release_year, "2016")
         self.assertEqual(s1.album, "No Album")
         self.assertEqual(s2.album, "Demons")
-        self.assertEqual(len(s1), 0)
-        self.assertEqual(len(s2), 251)
-
 
         mo1 = proj1.Movie()
         mo2 = proj1.Movie("Cars 3", "Brian Fee", "2017", "6.8", 6120000)
+
         self.assertEqual(mo1.title, "No Title")
         self.assertEqual(mo2.title, "Cars 3")
         self.assertEqual(mo1.author, "No Author")
@@ -35,16 +38,40 @@ class TestMedia(unittest.TestCase):
         self.assertEqual(mo2.year, "2017")
         self.assertEqual(mo1.rating, "No Rating")
         self.assertEqual(mo2.rating, "6.8")
+
+        pass
+
+    def testString(self):
+        s1 = proj1.Song()
+        s2 = proj1.Song("Demons", "Kai Wachi", "2016", "Demons", 251000)
+
+        print()
+        print()
+
+        mo1 = proj1.Movie()
+        mo2 = proj1.Movie("Cars 3", "Brian Fee", "2017", "6.8", 6120000)
+        print()
+        print()
+
+
+        pass
+
+    def testLength(self):
+        s1 = proj1.Song()
+        s2 = proj1.Song("Demons", "Kai Wachi", "2016", "Demons", 251000)
+
+        self.assertEqual(len(s1), 0)
+        self.assertEqual(len(s2), 251)
+
+        mo1 = proj1.Movie()
+        mo2 = proj1.Movie("Cars 3", "Brian Fee", "2017", "6.8", 6120000)
+
         self.assertEqual(mo1.length, 0)
         self.assertEqual(mo2.length, 102)
 
         pass
 
-    def testString(self):
-
-        pass
-
-    def testLength(self):
+    def testRandom(self):
 
         pass
 
