@@ -15,7 +15,7 @@ class Media:
 ## Other classes, functions, etc. should go here
 class Song(Media):
     def __init__(self, title= "No Title", author="No Author", year="No Year", album="No Album", genre="No Genre",
-                 length=0):
+                 length= 0):
         super().__init__(title, author, year)
         self.album = album
         self.genre = genre
@@ -32,13 +32,13 @@ class Song(Media):
 
 class Movie(Media):
     def __init__(self, title="No Title", author="No Author", year="No Release Year", rating="No Rating",
-                 movie_length="No Movie Length"):
+                 movie_length=0):
         super().__init__(title, author, year)
         self.rating = rating
         self.movie_length = movie_length
 
     def __str__(self):
-        return  super().__str__() + "[" + self.rating + "]"
+        return super().__str__() + "[" + self.rating + "]"
 
     def __len__(self):
         maybe = self.movie_length
