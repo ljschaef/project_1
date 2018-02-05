@@ -70,7 +70,10 @@ class Movie(Media):
             minutes += 1
         return minutes
 
-def 
+def file_opener(json_dict):
+    json_file = open(json_dict)
+    json_file.read()
+    pass
 
 if __name__ == "__main__":
 	# your control code for Part 4 (interactive search) should go here
