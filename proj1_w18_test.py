@@ -1,5 +1,6 @@
 import proj1_w18
 
+
 class TestMedia(unittest.TestCase):
 
     def testConstructor(self):
@@ -109,6 +110,15 @@ class TestMedia(unittest.TestCase):
         self.assertEqual(hasattr(mo2, album), False)
         self.assertEqual(hasattr(m1, album), False)
         self.assertEqual(hasattr(m2, album), False)
+
+        pass
+
+class testPartB(unittest.TestCase):
+
+    def testJSON(self):
+        m1 = proj1.Media(sample_json)
+        s1 = proj1.Song(sample_json)
+        mo1 = proj1.Movie(sample_json)
 
         pass
 
