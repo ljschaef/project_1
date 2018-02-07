@@ -116,7 +116,7 @@ class TestMedia(unittest.TestCase):
 class testPartB(unittest.TestCase):
 
     def testJSON(self):
-        m1 = proj1.Media("1999", "Prince", "", proj1.file_opener("sample_json.json"))
+        m1 = proj1.Media(json_dict=proj1.file_opener("sample_json.json"))
         print(m1)
 
         pass

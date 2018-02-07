@@ -7,16 +7,15 @@ class Media:
     def __init__(self, title="No Title", author="No Author", year="No Year", json_dict=None):
         if json_dict is not None:
             for a in json_dict:
-                if a["wrapperType"] == "track":
-                    if a["kind"] == "song":
-                        Song(a)
-                    else:
-                        Movie(a)
-                else:
+                if a["wrapperType"] != "track" and a["wrapperType"] != "feature-movie":
                     self.title = a["collectionName"]
                     self.author = a["artistName"]
                     self.year = a["releaseDate"]
-                    self.release_year = self.year[0:4]
+                    self.year = self.year[0:4]
+                else:
+                    self.title = title
+                    self.author = author
+                    self.release_year = year
         else:
             self.title = title
             self.author = author
@@ -77,6 +76,7 @@ class Movie(Media):
 def file_opener(filename):
     json_file = open(filename)
     json_stuff = json_file.read()
+    json_file.close()
     return json.loads(json_stuff)
 
 if __name__ == "__main__":
