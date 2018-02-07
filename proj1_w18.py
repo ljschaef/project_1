@@ -77,7 +77,7 @@ class Movie(Media):
 def file_opener(filename):
     json_file = open(filename)
     json_stuff = json_file.read()
-    return json_stuff
+    return json.loads(json_stuff)
 
 if __name__ == "__main__":
 	# your control code for Part 4 (interactive search) should go here
