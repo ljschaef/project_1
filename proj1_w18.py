@@ -9,14 +9,14 @@ class Media:
             for a in json_dict:
                 if a["wrapperType"] == "track":
                     if a["kind"] == "song":
-                        a.Song()
+                        Song(a)
                     else:
-                        a.Movie()
+                        Movie(a)
                 else:
                     self.title = a["collectionName"]
                     self.author = a["artistName"]
                     self.year = a["releaseDate"]
-                    self.year = self.year[0:3]
+                    self.release_year = self.year[0:4]
         else:
             self.title = title
             self.author = author
@@ -81,4 +81,4 @@ def file_opener(filename):
 
 if __name__ == "__main__":
 	# your control code for Part 4 (interactive search) should go here
-	file_opener("sample_json.json")
+	pass
