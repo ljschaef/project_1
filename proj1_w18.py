@@ -11,7 +11,11 @@ class Media:
                     self.title = a["collectionName"]
                     self.author = a["artistName"]
                     self.year = a["releaseDate"]
-                    self.year = self.year[0:4]
+                    self.release_year = self.year[0:4]
+                elif a["wrapperType"] == "track":
+                    Song(a)
+                elif a["wrapperType"] == "feature-movie":
+                    Movie(a)
                 else:
                     self.title = title
                     self.author = author
@@ -31,12 +35,16 @@ class Media:
 class Song(Media):
     def __init__(self, title= "No Title", author="No Author", year="No Year", album="No Album", genre="No Genre",
                  length= 0, json_dict=None):
-        super().__init__(title, author, year, json_dict)
         if json_dict is not None:
+            self.title = json_dict["trackName"]
+            self.author = json_dict["artistName"]
+            self.year= json_dict["releaseDate"]
+            self.release_year = self.year[0:4]
             self.album = json_dict["collectionName"]
             self.genre = json_dict["primaryGenreName"]
             self.length = json_dict["trackTimeMillis"]
         else:
+            super().__init__(title, author, year)
             self.album = album
             self.genre = genre
             self.length = length
@@ -53,11 +61,15 @@ class Song(Media):
 class Movie(Media):
     def __init__(self, title="No Title", author="No Author", year="No Release Year", rating="No Rating",
                  movie_length=0, json_dict=None):
-        super().__init__(title, author, year, json_dict)
         if json_dict is not None:
+            self.title = json_dict["trackName"]
+            self.author = json_dict["artistName"]
+            self.year = json_dict["releaseDate"]
+            self.release_year = self.year[0:4]
             self.rating = json_dict["contentAdvisoryRating"]
             self.movie_length = json_dict["trackTimeMillis"]
         else:
+            super().__init__(title, author, year)
             self.rating = rating
             self.movie_length = movie_length
 

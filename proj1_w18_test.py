@@ -48,20 +48,20 @@ class TestMedia(unittest.TestCase):
         m1 = proj1.Media()
         m2 = proj1.Media("1999", "Prince")
 
-        self.assertEqual(m1, "No Title by No Author(No Year)")
-        self.assertEqual(m2, "1999 by Prince(No Year)")
+        self.assertEqual(str(m1), "No Title by No Author(No Year)")
+        self.assertEqual(str(m2), "1999 by Prince(No Year)")
 
         s1 = proj1.Song()
         s2 = proj1.Song("Demons", "Kai Wachi", "2016", "Demons", "EDM", 251000)
 
-        self.assertEqual(s1, "No Title by No Author(No Year)[No Genre]")
-        self.assertEqual(s2, "Demons by Kai Wachi(2016)[EDM]")
+        self.assertEqual(str(s1), "No Title by No Author(No Year)[No Genre]")
+        self.assertEqual(str(s2), "Demons by Kai Wachi(2016)[EDM]")
 
         mo1 = proj1.Movie()
         mo2 = proj1.Movie("Cars 3", "Brian Fee", "2017", "PG", 6120000)
 
-        self.assertEqual(mo1, "No Title by No Author(No Release Year)[No Rating]")
-        self.assertEqual(mo2, "Cars 3 by Brian Fee(2017)[PG]")
+        self.assertEqual(str(mo1), "No Title by No Author(No Release Year)[No Rating]")
+        self.assertEqual(str(mo2), "Cars 3 by Brian Fee(2017)[PG]")
 
         pass
 
