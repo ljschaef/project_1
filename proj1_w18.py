@@ -29,6 +29,7 @@ class Media:
 
 ## Other classes, functions, etc. should go here
 class Song(Media):
+
     def __init__(self, title= "No Title", author="No Author", year="No Year", album="No Album", genre="No Genre",
                  length= 0, json_dict=None):
         if json_dict is not None:
@@ -62,6 +63,7 @@ class Song(Media):
         return int(seconds)
 
 class Movie(Media):
+
     def __init__(self, title="No Title", author="No Author", year="No Release Year", rating="No Rating",
                  movie_length=0, json_dict=None):
         if json_dict is not None:
