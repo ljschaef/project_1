@@ -49,7 +49,7 @@ class Song(Media):
     def __len__(self):
         maybe = self.length
         seconds = maybe / 1000
-        return seconds
+        return int(seconds)
 
 class Movie(Media):
     def __init__(self, title="No Title", author="No Author", year="No Release Year", rating="No Rating",
@@ -72,7 +72,7 @@ class Movie(Media):
         remaining = seconds % 60
         if remaining >= 30:
             minutes += 1
-        return minutes
+        return int(minutes)
 
 def file_opener(filename):
     json_file = open(filename)
