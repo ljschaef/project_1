@@ -7,15 +7,11 @@ class Media:
     def __init__(self, title="No Title", author="No Author", year="No Year", json_dict=None):
         if json_dict is not None:
             for a in json_dict:
-                if a["wrapperType"] != "track" and a["wrapperType"] != "feature-movie":
+                if a["wrapperType"] != "track":
                     self.title = a["collectionName"]
                     self.author = a["artistName"]
                     self.year = a["releaseDate"]
                     self.release_year = self.year[0:4]
-                elif a["wrapperType"] == "track":
-                    Song(a)
-                elif a["wrapperType"] == "feature-movie":
-                    Movie(a)
                 else:
                     self.title = title
                     self.author = author
@@ -36,13 +32,20 @@ class Song(Media):
     def __init__(self, title= "No Title", author="No Author", year="No Year", album="No Album", genre="No Genre",
                  length= 0, json_dict=None):
         if json_dict is not None:
-            self.title = json_dict["trackName"]
-            self.author = json_dict["artistName"]
-            self.year= json_dict["releaseDate"]
-            self.release_year = self.year[0:4]
-            self.album = json_dict["collectionName"]
-            self.genre = json_dict["primaryGenreName"]
-            self.length = json_dict["trackTimeMillis"]
+            for a in json_dict:
+                if a["wrapperType"] == "track" and a["kind"] == "song":
+                    self.title = a["trackName"]
+                    self.author = a["artistName"]
+                    self.year= a["releaseDate"]
+                    self.release_year = self.year[0:4]
+                    self.album = a["collectionName"]
+                    self.genre = a["primaryGenreName"]
+                    self.length = a["trackTimeMillis"]
+                else:
+                    super().__init__(title, author, year)
+                    self.album = album
+                    self.genre = genre
+                    self.length = length
         else:
             super().__init__(title, author, year)
             self.album = album
@@ -62,12 +65,18 @@ class Movie(Media):
     def __init__(self, title="No Title", author="No Author", year="No Release Year", rating="No Rating",
                  movie_length=0, json_dict=None):
         if json_dict is not None:
-            self.title = json_dict["trackName"]
-            self.author = json_dict["artistName"]
-            self.year = json_dict["releaseDate"]
-            self.release_year = self.year[0:4]
-            self.rating = json_dict["contentAdvisoryRating"]
-            self.movie_length = json_dict["trackTimeMillis"]
+            for a in json_dict:
+                if a["wrapperType"] == "track" and a["kind"] == "feature-movie":
+                    self.title = a["trackName"]
+                    self.author = a["artistName"]
+                    self.year = a["releaseDate"]
+                    self.release_year = self.year[0:4]
+                    self.rating = a["contentAdvisoryRating"]
+                    self.movie_length = a["trackTimeMillis"]
+                else:
+                    super().__init__(title, author, year)
+                    self.rating = rating
+                    self.movie_length = movie_length
         else:
             super().__init__(title, author, year)
             self.rating = rating

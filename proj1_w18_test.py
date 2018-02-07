@@ -118,6 +118,10 @@ class testPartB(unittest.TestCase):
     def testJSON(self):
         m1 = proj1.Media(json_dict=proj1.file_opener("sample_json.json"))
         print(m1)
+        s1 = proj1.Song(json_dict=proj1.file_opener("sample_json.json"))
+        print(s1)
+        mo1 = proj1.Movie(json_dict=proj1.file_opener("sample_json.json"))
+        print(mo1)
 
         pass
 
