@@ -6,13 +6,17 @@ class Media:
 
     def __init__(self, title="No Title", author="No Author", year="No Year", json_dict=None):
         if json_dict is not None:
-            if json_dict["wrapperType"] == "track":
-                self.title = json_dict["trackName"]
-            else:
-                self.title = json_dict["collectionName"]
-            self.author = json_dict["artistName"]
-            self.year = json_dict["releaseDate"]
-            self.year = self.year[0:3]
+            for a in json_dict:
+                if a["wrapperType"] == "track":
+                    if a["kind"] == "song":
+                        a.Song()
+                    else:
+                        a.Movie()
+                else:
+                    self.title = a["collectionName"]
+                    self.author = a["artistName"]
+                    self.year = a["releaseDate"]
+                    self.year = self.year[0:3]
         else:
             self.title = title
             self.author = author
@@ -70,11 +74,11 @@ class Movie(Media):
             minutes += 1
         return minutes
 
-def file_opener(json_dict):
-    json_file = open(json_dict)
-    json_file.read()
-    return json_file
+def file_opener(filename):
+    json_file = open(filename)
+    json_stuff = json_file.read()
+    return json_stuff
 
 if __name__ == "__main__":
 	# your control code for Part 4 (interactive search) should go here
-	pass
+	file_opener("sample_json.json")
