@@ -116,13 +116,18 @@ class TestMedia(unittest.TestCase):
 class testPartB(unittest.TestCase):
 
     def testJSON(self):
-        m1 = proj1.Media(json_dict=proj1.file_opener("sample_json.json"))
-        print(m1)
-        s1 = proj1.Song(json_dict=proj1.file_opener("sample_json.json"))
-        print(s1)
-        mo1 = proj1.Movie(json_dict=proj1.file_opener("sample_json.json"))
-        print(mo1)
-
+        json_file = proj1.file_opener("sample_json.json")
+        for a in json_file:
+            if a["wrapperType"] == "track":
+                if a["kind"] == "song":
+                    s1 = proj1.Song(json_dict=json_file)
+                    print(s1)
+                else:
+                    mo1 = proj1.Movie(json_dict=json_file)
+                    print(mo1)
+            else:
+                m1 = proj1.Media(json_dict=json_file)
+                print(m1)
         pass
 
 
