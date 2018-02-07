@@ -120,13 +120,13 @@ class testPartB(unittest.TestCase):
         for a in json_file:
             if a["wrapperType"] == "track":
                 if a["kind"] == "song":
-                    s1 = proj1.Song(json_dict=json_file)
+                    s1 = proj1.Song(json_dict=a)
                     print(s1)
                 else:
-                    mo1 = proj1.Movie(json_dict=json_file)
+                    mo1 = proj1.Movie(json_dict=a)
                     print(mo1)
             else:
-                m1 = proj1.Media(json_dict=json_file)
+                m1 = proj1.Media(json_dict=a)
                 print(m1)
         pass
 
