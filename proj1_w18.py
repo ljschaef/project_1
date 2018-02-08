@@ -1,6 +1,6 @@
 import requests
 import json
-
+import webbrowser
 
 class Media:
 
@@ -35,6 +35,7 @@ class Song(Media):
             self.album = json_dict["collectionName"]
             self.genre = json_dict["primaryGenreName"]
             self.length = json_dict["trackTimeMillis"]
+            self.url = json_dict[""]
         else:
             super().__init__(title, author, year)
             self.album = album
@@ -59,6 +60,7 @@ class Movie(Media):
             self.year = json_dict["releaseDate"]
             self.release_year = self.year[0:4]
             self.rating = json_dict["contentAdvisoryRating"]
+            self.url = json_dict["trackViewUrl"]
             try:
                 self.movie_length = json_dict["trackTimeMillis"]
             except:
@@ -92,8 +94,7 @@ if __name__ == "__main__":
     user = input("Enter a search term or enter exit to quit")
     while user != "exit":
         base_url = 'https://itunes.apple.com/search?'
-        t = ""
-        json_string = requests.get(base_url, params={'term': t})
+        json_string = requests.get(base_url, params={'term': user})
         results_list = json.loads(json_string.text)['results']
         counter = 1
         for a in results_list:
@@ -110,11 +111,10 @@ if __name__ == "__main__":
                 m1 = proj1.Media(json_dict=a)
                 print(counter + ". " + m1)
                 counter += 1
-        mehr_input = input("Enter a search term, enter number of term to launch preview, or enter exit to quit")
-        if mehr_input.isdigit():
-            search = results_list[int(mehr_input)]
+        user = input("Enter a search term, enter number of a term to launch preview, or enter exit to quit")
+        if user.isdigit():
+            search = results_list[int(user)]
             if search.url != "no url":
-                webbrowswer.open(search.url)
-        elif mehr_input != "exit":
-
+                webbrowser.open(search.url)
+                print(search.url)
     exit()
