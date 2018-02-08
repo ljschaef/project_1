@@ -4,12 +4,13 @@ import json
 
 class Media:
 
-    def __init__(self, title="No Title", author="No Author", year="No Year", json_dict=None):
+    def __init__(self, title="No Title", author="No Author", year="No Year", url= "no url", json_dict=None):
         if json_dict is not None:
             self.title = json_dict["collectionName"]
             self.author = json_dict["artistName"]
             self.year = json_dict["releaseDate"]
             self.release_year = self.year[0:4]
+            self.url = json_dict[""]
         else:
             self.title = title
             self.author = author
@@ -25,7 +26,7 @@ class Media:
 class Song(Media):
 
     def __init__(self, title= "No Title", author="No Author", year="No Year", album="No Album", genre="No Genre",
-                 length= 0, json_dict=None):
+                 length= 0, url= "no url", json_dict=None):
         if json_dict is not None:
             self.title = json_dict["trackName"]
             self.author = json_dict["artistName"]
@@ -51,7 +52,7 @@ class Song(Media):
 
 class Movie(Media):
     def __init__(self, title="No Title", author="No Author", year="No Release Year", rating="No Rating",
-                 movie_length=0, json_dict=None):
+                 movie_length=0, url= "no url", json_dict=None):
         if json_dict is not None:
             self.title = json_dict["trackName"]
             self.author = json_dict["artistName"]
@@ -88,4 +89,32 @@ def file_opener(filename):
 
 if __name__ == "__main__":
 	# your control code for Part 4 (interactive search) should go here
-	pass
+    user = input("Enter a search term or enter exit to quit")
+    while user != "exit":
+        base_url = 'https://itunes.apple.com/search?'
+        t = ""
+        json_string = requests.get(base_url, params={'term': t})
+        results_list = json.loads(json_string.text)['results']
+        counter = 1
+        for a in results_list:
+            if a["wrapperType"] == "track":
+                if a["kind"] == "song":
+                    s1 = proj1.Song(json_dict=a)
+                    print(counter + ". " + s1)
+                    counter += 1
+                else:
+                    mo1 = proj1.Movie(json_dict=a)
+                    print(counter + ". " + mo1)
+                    counter += 1
+            else:
+                m1 = proj1.Media(json_dict=a)
+                print(counter + ". " + m1)
+                counter += 1
+        mehr_input = input("Enter a search term, enter number of term to launch preview, or enter exit to quit")
+        if mehr_input.isdigit():
+            search = results_list[int(mehr_input)]
+            if search.url != "no url":
+                webbrowswer.open(search.url)
+        elif mehr_input != "exit":
+
+    exit()
