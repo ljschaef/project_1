@@ -1,5 +1,7 @@
 import proj1_w18 as proj1
 import unittest
+import requests
+import json
 
 class TestMedia(unittest.TestCase):
 
@@ -129,6 +131,95 @@ class testPartB(unittest.TestCase):
                 m1 = proj1.Media(json_dict=a)
                 print(m1)
         pass
+class testPartC(unittest.TestCase):
+
+    def test_API(self):
+        base_url = 'https://itunes.apple.com/search?'
+
+        t = "Delilah"
+        json_string = requests.get(base_url, params={'term': t})
+        results_list = json.loads(json_string.text)['results']
+        r = len(results_list)
+        self.assertLessEqual(r, 50)
+        for a in results_list:
+            if a["wrapperType"] == "track":
+                if a["kind"] == "song":
+                    s1 = proj1.Song(json_dict=a)
+                    print(s1)
+                else:
+                    mo1 = proj1.Movie(json_dict=a)
+                    print(mo1)
+            else:
+                m1 = proj1.Media(json_dict=a)
+                print(m1)
+
+        t = "love"
+        json_string = requests.get(base_url, params={'term': t})
+        results_list = json.loads(json_string.text)['results']
+        r = len(results_list)
+        self.assertLessEqual(r, 50)
+        for a in results_list:
+            if a["wrapperType"] == "track":
+                if a["kind"] == "song":
+                    s1 = proj1.Song(json_dict=a)
+                    print(s1)
+                else:
+                    mo1 = proj1.Movie(json_dict=a)
+                    print(mo1)
+            else:
+                m1 = proj1.Media(json_dict=a)
+                print(m1)
+
+        t = "dfhljasdhjfklajsdfkljs"
+        json_string = requests.get(base_url, params={'term': t})
+        results_list = json.loads(json_string.text)['results']
+        r = len(results_list)
+        self.assertLessEqual(r, 50)
+        for a in results_list:
+            if a["wrapperType"] == "track":
+                if a["kind"] == "song":
+                    s1 = proj1.Song(json_dict=a)
+                    print(s1)
+                else:
+                    mo1 = proj1.Movie(json_dict=a)
+                    print(mo1)
+            else:
+                m1 = proj1.Media(json_dict=a)
+                print(m1)
+
+        t = "helter skelter"
+        json_string = requests.get(base_url, params={'term': t})
+        results_list = json.loads(json_string.text)['results']
+        r = len(results_list)
+        self.assertLessEqual(r, 50)
+        for a in results_list:
+            if a["wrapperType"] == "track":
+                if a["kind"] == "song":
+                    s1 = proj1.Song(json_dict=a)
+                    print(s1)
+                else:
+                    mo1 = proj1.Movie(json_dict=a)
+                    print(mo1)
+            else:
+                m1 = proj1.Media(json_dict=a)
+                print(m1)
+
+        t = ""
+        json_string = requests.get(base_url, params={'term': t})
+        results_list = json.loads(json_string.text)['results']
+        r = len(results_list)
+        self.assertLessEqual(r, 50)
+        for a in results_list:
+            if a["wrapperType"] == "track":
+                if a["kind"] == "song":
+                    s1 = proj1.Song(json_dict=a)
+                    print(s1)
+                else:
+                    mo1 = proj1.Movie(json_dict=a)
+                    print(mo1)
+            else:
+                m1 = proj1.Media(json_dict=a)
+                print(m1)
 
 
 unittest.main()

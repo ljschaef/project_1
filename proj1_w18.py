@@ -58,7 +58,10 @@ class Movie(Media):
             self.year = json_dict["releaseDate"]
             self.release_year = self.year[0:4]
             self.rating = json_dict["contentAdvisoryRating"]
-            self.movie_length = json_dict["trackTimeMillis"]
+            try:
+                self.movie_length = json_dict["trackTimeMillis"]
+            except:
+                self.movie_length = "None"
         else:
             super().__init__(title, author, year)
             self.rating = rating
