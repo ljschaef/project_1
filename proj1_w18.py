@@ -10,7 +10,7 @@ class Media:
             self.author = json_dict["artistName"]
             self.year = json_dict["releaseDate"]
             self.release_year = self.year[0:4]
-            self.url = json_dict[""]
+            self.url = json_dict["collectionViewUrl"]
         else:
             self.title = title
             self.author = author
@@ -35,7 +35,7 @@ class Song(Media):
             self.album = json_dict["collectionName"]
             self.genre = json_dict["primaryGenreName"]
             self.length = json_dict["trackTimeMillis"]
-            self.url = json_dict[""]
+            self.url = json_dict["trackViewUrl"]
         else:
             super().__init__(title, author, year)
             self.album = album
@@ -100,16 +100,18 @@ if __name__ == "__main__":
         for a in results_list:
             if a["wrapperType"] == "track":
                 if a["kind"] == "song":
-                    s1 = proj1.Song(json_dict=a)
-                    print(counter + ". " + s1)
+                    s1 = Song(json_dict=a)
+                    #print(s1)
+                    print(str(counter) + ". " + str(s1))
                     counter += 1
                 else:
-                    mo1 = proj1.Movie(json_dict=a)
-                    print(counter + ". " + mo1)
+                    mo1 = Movie(json_dict=a)
+                    #print(mo1)
+                    print(str(counter) + ". " + str(mo1))
                     counter += 1
             else:
-                m1 = proj1.Media(json_dict=a)
-                print(counter + ". " + m1)
+                m1 = Media(json_dict=a)
+                print(str(counter) + ". " + str(m1))
                 counter += 1
         user = input("Enter a search term, enter number of a term to launch preview, or enter exit to quit")
         if user.isdigit():
